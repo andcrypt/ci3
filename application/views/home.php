@@ -30,8 +30,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#"> Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="<?php echo site_url('home/menu1')?>">About</a></li>
+            <li><a href="<?php echo site_url('home/menu2')?>">Contact</a></li>
+
           </ul>
           
         </div>
@@ -39,8 +40,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </nav>
 
   <!--/.ASIQUE -->
-    <?php $this->load->view('about_view.php');?>  
-
-
+      <div class="col-xs-6 col-md-6 col-sm-6 col-lg-6">
+      <div class="table responsive">
+        <h1>Biodata Array</h1>
+          <div class="table-responsive">
+        
+        <table class="table tabel-hover">
+        <tbody>
+          <?php foreach ($biodata_array as $key) { ?>
+        <tr>
+          <td><?php echo $key['nama']  ?></td>
+        </tr>
+        <tr>
+          <td><?php echo $key['nim']  ?></td>
+        </tr>
+        <tr>
+          <td><?php echo $key['alamat']  ?></td>
+        </tr>
+          <?php } ?>
+        </tbody>
+        
+        </table>
+        </div>
+      </div>
+    </div>
 </body>
 </html>
