@@ -41,7 +41,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div class="container">
   <div class="jumbotron">
 
-    <h1>Biodata Web</h1>
+    <h1><?php echo $isi_halaman; ?></h1>
         
   
 </div>

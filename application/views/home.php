@@ -63,6 +63,80 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </table>
         </div>
       </div>
-    </div>
+ </div>
+
+      <div class="col-xs-6 col-md-6 col-sm-6 col-lg-6">
+      <div class="table responsive">
+        <h1>Biodata Object</h1>
+          <div class="table-responsive">
+        
+        <table class="table tabel-hover">
+        <tbody>
+          <?php foreach ($biodata_object as $key) { ?>
+        <tr>
+          <td><?php echo $key->nama ?></td>
+        </tr>
+        <tr>
+          <td><?php echo $key->nim  ?></td>
+        </tr>
+        <tr>
+          <td><?php echo $key->alamat  ?></td>
+        </tr>
+          <?php } ?>
+        </tbody>
+        
+        </table>
+        </div>
+      </div>
+</div>
+<div class="col-xs-6 col-md-6 col-sm-6 col-lg-6">
+      <div class="table responsive">
+        <h1>Biodata Builder Array</h1>
+          <div class="table-responsive">
+        
+        <table class="table tabel-hover">
+        <tbody>
+          <?php foreach ($biodatabuilder_array as $key) { ?>
+        <tr>
+          <td><?php echo $key['nama']  ?></td>
+        </tr>
+        <tr>
+          <td><?php echo $key['nim']  ?></td>
+        </tr>
+        <tr>
+          <td><?php echo $key['alamat']  ?></td>
+        </tr>
+          <?php } ?>
+        </tbody>
+        
+        </table>
+        </div>
+      </div>
+ </div>
+
+      <div class="col-xs-6 col-md-6 col-sm-6 col-lg-6">
+      <div class="table responsive">
+        <h1>Biodata Builder Object</h1>
+          <div class="table-responsive">
+        
+        <table class="table tabel-hover">
+        <tbody>
+          <?php foreach ($biodatabuilder_object as $key) { ?>
+        <tr>
+          <td><?php echo $key->nama ?></td>
+        </tr>
+        <tr>
+          <td><?php echo $key->nim  ?></td>
+        </tr>
+        <tr>
+          <td><?php echo $key->alamat  ?></td>
+        </tr>
+          <?php } ?>
+        </tbody>
+        
+        </table>
+        </div>
+      </div>
+</div>
 </body>
 </html>
