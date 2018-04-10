@@ -18,6 +18,11 @@ class Bloglist extends CI_Controller {
 		$this->load->view('dashboard/index',$data);
 	}
 
- 
+	public function blogdetail()
+	{
+		$this->load->model('m_bloglist'); //load model blog list
+		$datadetail['datadetail']=$this->m_bloglist->getBlog(); 
+		$this->load->view('dashboard/blogview', $datadetail);
+	}	
 
 }
