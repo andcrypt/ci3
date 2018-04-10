@@ -47,5 +47,9 @@ class Home extends CI_Controller {
 		$this->load->view('contact_view');
 	}	
 
+	public function blog()
+	{
+	 $this->load->view('dashboard/index');
+	}
 
 }

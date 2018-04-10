@@ -32,6 +32,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li class="active"><a href="#"> Home</a></li>
             <li><a href="<?php echo site_url('home/menu1')?>">About</a></li>
             <li><a href="<?php echo site_url('home/menu2')?>">Contact</a></li>
+            <li><a href="<?php echo site_url('home/blog')?>">Blog</a></li>
 
           </ul>
           
