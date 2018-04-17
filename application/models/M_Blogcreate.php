@@ -49,6 +49,11 @@ class M_Blogcreate extends CI_Model{
            return 1;
        } 
     }
+
+    function hapus_data($where,$table){
+		$this->db->where($where);
+		$this->db->delete($table);
+	}
 }
 
 ?>

@@ -28,6 +28,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <p class="card-text">Tanggal: <?php echo $key->date ?></p>
     <button class="btn btn-primary">Selengkapnya</button>
     <a href="<?php echo base_url('blogcreate/addartikel/').$key->id;?>" class="btn btn-primary">Edit</a>
+    <a href="<?php echo base_url('blogcreate/hapus').$key->id;?>" class="btn btn-primary">Hapus</a>
     </div>
     </div>
     </div>

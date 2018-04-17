@@ -48,7 +48,7 @@ class Blogcreate extends CI_Controller {
         }
         
 
-       
+       //validasi
         if($data['id'] != ''){
             if($data['title'] == '')
             {
@@ -103,4 +103,9 @@ class Blogcreate extends CI_Controller {
 
         }
 
+        function hapus($id){ //hapus e
+            $where = array('id' => $id);
+            $this->m_blogcreate->hapusartikel($where,'blog');
+            redirect('dashboard/index');
+        }
 }
