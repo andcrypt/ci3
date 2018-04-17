@@ -10,19 +10,45 @@ class M_Blogcreate extends CI_Model{
 
     }
 
-    public function insert($judul,$tanggal,$author,$isi,$gambar){
-        $data=array('artikel_title'=>$this->input->post('title'),
-                    'artikel_tanggal'=>$this->input->post('date'),
-                    'artikel_author'=>$this->input->post('author'),
-                    'artikel_isi'=>$this->input->post('content'),
-                    'artikel_gambar'=>$this->input->post('image_file')
+    public function insert($data,$namagambar){
+        $data=array('title'=>$data['title'],
+                    'date'=>$data['date'],
+                    'author'=>$data['author'],
+                    'content'=>$data['content'],
+                    'image_file'=>$namagambar,
                 );
 
-        $this->db->insert('artikel',$data);
-        redirect('dashboard/index');
-
+       if($this->db->insert('blog',$data)){
+           return 1;
+       } 
     }
 
+    public function update($data,$namagambar,$id){
+
+        if($namagambar != '')
+        {
+            $data=array('title'=>$data['title'],
+            'date'=>$data['date'],
+            'author'=>$data['author'],
+            'content'=>$data['content'],
+            'image_file'=>$namagambar,
+        );
+   
+        }else{
+            $data=array('title'=>$data['title'],
+                    'date'=>$data['date'],
+                    'author'=>$data['author'],
+                    'content'=>$data['content'],
+                );
+        
+        }
+        
+                // $id=$data['id'];
+                if($this->db->update('blog',$data,array('id' => $id))){
+                                       
+           return 1;
+       } 
+    }
 }
 
 ?>

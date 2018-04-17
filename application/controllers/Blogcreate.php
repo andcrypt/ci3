@@ -8,9 +8,9 @@ class Blogcreate extends CI_Controller {
     function __construct()
     {
         parent::__construct();
-			$this->load->helper('url');
-            $this->image_path = realpath(APPPATH . '.../images');
-            $this->image_path_url = base() . 'images/';
+            $this->load->model('m_blogcreate');
+            // $this->image_path = realpath(APPPATH . '/images');
+            // $this->image_path_url = base() . 'images/';
 
     }
 
@@ -19,30 +19,88 @@ class Blogcreate extends CI_Controller {
 		$this->load->view('addartikel');
 	}
 
-    function addartikel(){
-        if($this->input->post('title')){
-            
-            $this->model_dashboard->insert($judul,$tanggal,$author,$isi,$gambar);
-            $config = array(
-                'allowed_types' => 'jpg|jpeg|gif|png',
-                'upload_path' => $this->galery_path,
-                'max_size' => 2000
-                );
-                //konfigurasi
-            $this->load->libary('upload',$config);
-                //proses upload
-            if ($this->upload->do_upload()) 
-                 {
-                    echo "berhasil Upload";
-                 }
-            else
-                {
-                    echo "Gagal";
-                }
-            redirect('dashboard/addartikel');
-        }else{
-            $this->load->view('form_artikel');
+    public function simpanblog()
+    {
+        $data = $this->input->post();
+       
+        if($_FILES['userfile']['name'] != '')
+        {
+        
+        $namagambar = $_FILES['userfile']['name'];
+        $config['upload_path']          = './asset/img/';
+        $config['file_name']            = $namagambar;
+        $config['allowed_types']        = 'gif|jpg|png';
+        $config['max_size']             = 2000;
+
+
+        $this->load->library('upload', $config);
+
+        if ( ! $this->upload->do_upload('userfile'))
+        {
+                $error = array('error' => $this->upload->display_errors());
+                echo $this->upload->display_errors();
+                exit();
         }
+        else
+        {
+                echo'sukses';
+        }
+        }
+        
+
+       
+        if($data['id'] != ''){
+            if($data['title'] == '')
+            {
+                $eror['title'] = 'title kosong';
+            }
+            if($data['author'] == '')
+            {
+                $eror['author'] = 'author kosong';
+            }
+            if($data['date'] == '')
+            {
+                $eror['date'] = 'date kosong';
+            }
+            if($data['content'] == '')
+            {
+                $eror['content'] = 'isi konten kosong';
+            }
+            if(isset($eror)){
+            $this->session->set_flashdata('pesan', $eror);
+            exit();
+            }
+            
+            $insert = $this->m_blogcreate->update($data,$namagambar,$data['id']);
+            redirect(base_url().'blogcreate/addartikel/').$data['id'];
+        }else{
+
+            $insert = $this->m_blogcreate->insert($data,$namagambar);
+        }
+       
+                if($insert == 1){
+                    redirect(base_url().'bloglist');
+                }
+                else{
+                    redirect(base_url().'blogcreate/addartikel');
+                }
+               
+                
+        
     }
+    function addartikel($id=''){ //edit
+       if($id != '')
+       {
+        
+        $this->db->where('id',$id);            
+        $get=$this->db->get_where('blog')->row_array();
+        $data['blog']=$get;
+        $data['id'] = $id;
+        $this->load->view('dashboard/addartikel',$data); 
+       }else{
+        $this->load->view('dashboard/addartikel');
+       }
+
+        }
 
 }
