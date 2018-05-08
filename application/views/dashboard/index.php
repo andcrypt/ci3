@@ -34,7 +34,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
 
 			<?php } ?>
+      <?php foreach ($all_artikel as $key) {
+        
+      ?>
 
+      <?php } ?>
+      <?php //if (isset($links)) {
+        	echo $links;
+	        //}
+	        ?>
   </form>
 </div>
 

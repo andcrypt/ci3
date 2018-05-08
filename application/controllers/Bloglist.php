@@ -13,10 +13,68 @@ class Bloglist extends CI_Controller {
 
 	public function index()
 	{
+
+		$limit_per_page = 6;
+
+        // URI segment untuk mendeteksi "halaman ke berapa" dari URL
+		$start_index = ( $this->uri->segment(3) ) ? $this->uri->segment(3) : 0;
+		
 		$this->load->model('m_bloglist'); //load model blog list
+		$this->load->model('blog_model');
+		$total_records = $this->blog_model->get_total();
+		$data["all_artikel"] = $this->blog_model->get_all_artikel($limit_per_page, 
+		$start_index);
+		
+		$config['base_url'] = base_url() . 'bloglist/';
+		$config['total_rows'] = $total_records;
+		$config['per_page'] = $limit_per_page;
+		$config["uri_segment"] = 3;
+		
+		$this->pagination->initialize($config);
+			
+		// Buat link pagination
+		$data["links"] = $this->pagination->create_links();
+
 		$data['datablog']=$this->m_bloglist->getBlog(); 
 		$this->load->view('dashboard/index',$data);
+		
+		
 	}
+
+	public function halaman()
+    {
+
+        $data['page_title'] = 'List Artikel';
+        
+        // Dapatkan data dari model Blog dengan pagination
+        // Jumlah artikel per halaman
+        $limit_per_page = 6;
+
+        // URI segment untuk mendeteksi "halaman ke berapa" dari URL
+        $start_index = ( $this->uri->segment(3) ) ? $this->uri->segment(3) : 0;
+
+        // Dapatkan jumlah 
+        $total_records = $this->blog_model->get_total();
+    
+        if ($total_records > 0) {
+            // Dapatkan data pada halaman yg dituju
+            $data["all_artikel"] = $this->blog_model->get_all_artikel($limit_per_page, 
+        $start_index);
+            
+            // Konfigurasi pagination
+            $config['base_url'] = base_url() . 'blog/index';
+            $config['total_rows'] = $total_records;
+            $config['per_page'] = $limit_per_page;
+            $config["uri_segment"] = 3;
+            
+            $this->pagination->initialize($config);
+                
+            // Buat link pagination
+            $data["links"] = $this->pagination->create_links();
+           
+        }    
+    }
+    
 
 	public function blogdetail()
 	{
