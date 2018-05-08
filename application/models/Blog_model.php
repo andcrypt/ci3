@@ -17,7 +17,7 @@ public function get_all_artikel( $limit = FALSE, $offset = FALSE )
        $query = $this->db->get('blogs');
 
        // Return dalam bentuk object
-       return $query->result();
+       return $query->result_array();
    }
 
    public function get_total()
@@ -26,7 +26,10 @@ public function get_all_artikel( $limit = FALSE, $offset = FALSE )
        return $this->db->count_all("blogs");
    }
 
-
+   public function getBlogQueryArray(){
+    $query = $this->db->query("select * from blog");
+    return $query->result_array();
+}
    
 }
 ?>
