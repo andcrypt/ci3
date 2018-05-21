@@ -36,8 +36,50 @@ if($this->form_validation->run() === FALSE){
     $this->session->set_flashdata('user_registered', 'Anda udah teregistrasi.');
 
     redirect('dashboard/register');
-}
-}
+        }
+    }
+
+    public function login(){
+        $data['page_title'] = 'Log In';
+
+        $this->form_validation->set_rules('username', 'Username', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+
+        if($this->form_validation->run() === FALSE){
+            $this->load->view('header');
+            $this->load->view('dashboard/login', $data);
+            //$this->load->view('templates/footer');
+        } else {
+            $username = $this->input->post('username');
+             // Get & encrypt password
+            $password = md5($this->input->post('password'));
+            $user_id = $this->user_model->login($username, $password);
+
+            if($user_id){
+             // Buat session
+            $user_data = array(
+            'user_id' => $user_id,
+            'username' => $username,
+            'logged_in' => true
+        );
+
+        $this->session->set_userdata($user_data);
+
+        // Set message
+        $this->session->set_flashdata('user_loggedin', 'Udah login bosque');
+
+        redirect('bloglist');
+    } else {
+        // Set message
+        $this->session->set_flashdata('login_failed', 'Login gagal');
+
+        redirect('dashboard/login');
+    }       
+}}
+
+
+
+
 }
 
 
