@@ -75,7 +75,19 @@ if($this->form_validation->run() === FALSE){
 
         redirect('dashboard/login');
     }       
-}}
+}
+        public function logout(){
+            
+            $this->session->unset_userdata('logged_in');
+            $this->session->unset_userdata('user_id');
+            $this->session->unset_userdata('username');
+
+            
+            $this->session->set_flashdata('user_loggedout', 'Anda sudah log out');
+
+            redirect('user/login');
+        }
+}
 
 
 
