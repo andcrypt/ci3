@@ -89,8 +89,12 @@ class Blogcreate extends CI_Controller {
         
     }
     function addartikel($id=''){ //edit
-       if($id != '')
-       {
+        if ($_SESSION['level']) {
+            $this->session->set_flashdata('tidakBerhak', 'Anda Tidak Berhak Mengedit Artikel! login Ulang!');
+            redirect('user/login');
+        }
+        if($id != '')
+        {
         
         $this->db->where('id',$id);            
         $get=$this->db->get_where('blog')->row_array();

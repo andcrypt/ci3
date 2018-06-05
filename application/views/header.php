@@ -37,13 +37,35 @@
             <li class="active"><a href="#"> Home</a></li>
             <li><a href="<?php echo site_url('home/menu1')?>">About</a></li>
             <li><a href="<?php echo site_url('home/menu2')?>">Contact</a></li>
-
+            <!-- <li><a href="<//?php echo site_url('user/logout')?>">Logout</a></li> -->
           </ul>
           
         </div>
       </div>
     </nav>
-    
+
+
+        <?php if(!isset($_SESSION['id_user'])){ ?>
+
+      <div class="btn-group" role="group" aria-label="Data baru">
+      <?php echo anchor('user/register', 'Register', array('class' => 'btn btn-outline-light')); ?>
+      <?php echo anchor('user/login', 'Login', array('class' => 'btn btn-outline-light')); ?>
+
+    </div>
+
+<?php } else {?>
+
+        <?php //if($this->session->userdata('logged_in')) : ?>
+        <div class="btn-group" role="group" aria-label="Data baru">
+
+       <?php echo anchor('blog/create', 'Artikel Baru', array('class' => 'btn btn-outline-light')); ?>
+       <?php echo anchor('category/create', 'Kategori Baru', array('class' => 'btn btn-outline-light')); ?>
+       <?php echo anchor('user/logout', 'Logout', array('class' => 'btn btn-outline-light')); ?>
+     </div>
+<?php } ?>
+
+
+
     <?php if($this->session->flashdata('user_registered')): ?>
          <?php echo '<div class="alert alert-success" role="alert">'.$this->session->flashdata('user_registered').'</div>'; ?>
        <?php endif; ?>
